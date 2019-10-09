@@ -149,86 +149,128 @@
 
 // export default App;
 /**************************demo2*************************** */
-import React, { Component } from 'react'
-import {getPixel,allPost} from './common/common/getPixel';
-import {
-  Button,
-  View,
-  StyleSheet,
-  DrawerLayoutAndroid,
-  Text,
-  FlatList
-} from 'react-native'
-var data=[{key: 'a'}, {key: 'b'},{key:'hha'},{key: 'a'}, {key: 'b'},{key:'hha'},{key: 'a'}, {key: 'b'},{key:'hha'}];
-function onPressLearnMore(){
-  alert('lall');
-  data=data.reverse();
-  alert(JSON.stringify(data));
-}
-var navigationView = (
-  <View style={{flex: 1, backgroundColor: '#fff'}}>
-    <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
-  </View>
-);
+// import React, { Component } from 'react'
+// import {getPixel,allPost} from './common/common/getPixel';
+// import {
+//   Button,
+//   View,
+//   StyleSheet,
+//   DrawerLayoutAndroid,
+//   Text,
+//   FlatList
+// } from 'react-native'
+// var data=[{key: 'a'}, {key: 'b'},{key:'hha'},{key: 'a'}, {key: 'b'},{key:'hha'},{key: 'a'}, {key: 'b'},{key:'hha'}];
+// function onPressLearnMore(){
+//   alert('lall');
+//   data=data.reverse();
+//   alert(JSON.stringify(data));
+// }
+// var navigationView = (
+//   <View style={{flex: 1, backgroundColor: '#fff'}}>
+//     <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
+//   </View>
+// );
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { chosenDate: new Date() };
+// export default class App extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { chosenDate: new Date() };
 
-    this.setDate = this.setDate.bind(this);
-  }
+//     this.setDate = this.setDate.bind(this);
+//   }
 
-  setDate(newDate) {
-    this.setState({chosenDate: newDate})
-  }
+//   setDate(newDate) {
+//     this.setState({chosenDate: newDate})
+//   }
 
+//   render() {
+//     return (
+//       <View>
+//       <View style={styles.container}>
+//          <View style={{flex:1,backgroundColor:'#578' }}><Text>hahhahahh</Text></View>
+//          <View style={{backgroundColor:'#679',flex:1}}>
+//          <Button  onPress={onPressLearnMore} title="Learn More" color="#acaca2"/>
+//          <Text>列表组件  可以下拉刷新加载</Text>
+//          <FlatList
+//             data={data}
+//             renderItem={({item}) => <Text>{item.key}</Text>}
+//           />
+//          </View>
+//          <DrawerLayoutAndroid backgroundColor='#996'
+//             drawerWidth={300}
+//             drawerPosition={DrawerLayoutAndroid.positions.Left}
+//             renderNavigationView={() => navigationView}>
+//             <View style={{flex: 1, alignItems: 'center'}}>
+//               <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
+//               <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
+//             </View>
+//             </DrawerLayoutAndroid>
+//       </View>
+//       <View style={{height:getPixel(200),backgroundColor:'#996',marginTop:getPixel(100), flexDirection:'row',}}>
+//       <View style={{width:getPixel(100),backgroundColor:'#578' }}><Text>hahhahahh</Text></View>
+//           <DrawerLayoutAndroid backgroundColor='#996'
+//             drawerWidth={300}
+//             drawerPosition={DrawerLayoutAndroid.positions.Left}
+//             renderNavigationView={() => navigationView}>
+//             <View style={{flex: 1, alignItems: 'center'}}>
+//               <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
+//               <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
+//             </View>
+//             </DrawerLayoutAndroid> 
+//       </View>
+//       </View>
+
+//     )
+//   }
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//       flexDirection:'row',
+//       backgroundColor:'#966',
+//       color:'#fff',
+//       height:200
+//   },
+// })
+
+/******************************demo3************************************************ */
+import React from 'react';
+import { View, Text,SafeAreaView } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
+class HomeScreen extends React.Component {
+  //   constructor(props) {
+//     super(props);
+//     this.state = { chosenDate: new Date() };
+
+//     this.setDate = this.setDate.bind(this);
+//   }
+    constructor(props){
+      super(props);
+      this.state={
+        title:'首页'
+      };
+    }
   render() {
     return (
-      <View>
-      <View style={styles.container}>
-         <View style={{flex:1,backgroundColor:'#578' }}><Text>hahhahahh</Text></View>
-         <View style={{backgroundColor:'#679',flex:1}}>
-         <Button  onPress={onPressLearnMore} title="Learn More" color="#acaca2"/>
-         <Text>列表组件  可以下拉刷新加载</Text>
-         <FlatList
-            data={data}
-            renderItem={({item}) => <Text>{item.key}</Text>}
-          />
-         </View>
-         <DrawerLayoutAndroid backgroundColor='#996'
-            drawerWidth={300}
-            drawerPosition={DrawerLayoutAndroid.positions.Left}
-            renderNavigationView={() => navigationView}>
-            <View style={{flex: 1, alignItems: 'center'}}>
-              <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
-              <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
-            </View>
-            </DrawerLayoutAndroid>
+     
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen!!</Text>
       </View>
-      <View style={{height:getPixel(200),backgroundColor:'#996',marginTop:getPixel(100), flexDirection:'row',}}>
-      <View style={{width:getPixel(100),backgroundColor:'#578' }}><Text>hahhahahh</Text></View>
-          <DrawerLayoutAndroid backgroundColor='#996'
-            drawerWidth={300}
-            drawerPosition={DrawerLayoutAndroid.positions.Left}
-            renderNavigationView={() => navigationView}>
-            <View style={{flex: 1, alignItems: 'center'}}>
-              <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>Hello</Text>
-              <Text style={{margin: 10, fontSize: 15, textAlign: 'right'}}>World!</Text>
-            </View>
-            </DrawerLayoutAndroid> 
-      </View>
-      </View>
-
-    )
+    
+    );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-      flexDirection:'row',
-      backgroundColor:'#966',
-      color:'#fff',
-      height:200
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: `A`,
+      headerBackTitle: null,
+    }),
   },
-})
+});
+
+export default createAppContainer(AppNavigator);
