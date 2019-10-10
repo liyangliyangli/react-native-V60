@@ -235,9 +235,42 @@
 
 /******************************demo3************************************************ */
 import React from 'react';
-import { View, Text,SafeAreaView } from 'react-native';
+import { View, Text,SafeAreaView,Button,Animated} from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import {getPixel} from './common/common/getPixel';
+import DetailScreen from  './pages/Details'
+import MyWeb from './pages/web'
+
+class FadeInView extends React.Component {
+  state = {
+    fadeAnim: new Animated.Value(0),  // 透明度初始值设为0
+  }
+
+  componentDidMount() {
+    Animated.timing(                  // 随时间变化而执行动画
+      this.state.fadeAnim,            // 动画中的变量值
+      {
+        toValue: 1,                   // 透明度最终变为1，即完全不透明
+        duration: 10000,              // 让动画持续一段时间
+      }
+    ).start();                        // 开始执行动画
+  }
+
+  render() {
+    let { fadeAnim } = this.state;
+    return (
+      <Animated.View                 // 使用专门的可动画化的View组件
+        style={{
+          ...this.props.style,
+          opacity: fadeAnim,         // 将透明度指定为动画变量值
+        }}
+      >
+        {this.props.children}
+      </Animated.View>
+    );
+  }
+}
 
 class HomeScreen extends React.Component {
   //   constructor(props) {
@@ -249,14 +282,25 @@ class HomeScreen extends React.Component {
     constructor(props){
       super(props);
       this.state={
-        title:'首页'
+        title:'首页!!!!'
       };
     }
   render() {
     return (
      
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen!!</Text>
+        <Text>Home Screen!!1231</Text>
+        <Button
+          title="Go to Details"
+          onPress={() => this.props.navigation.navigate('detail')}
+        />
+        <FadeInView style={{width: 250, height: 50, backgroundColor: 'powderblue'}}>
+          <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
+        </FadeInView>
+        <Button
+          title="Go to web"
+          onPress={() => this.props.navigation.navigate('web')}
+        />
       </View>
     
     );
@@ -267,10 +311,53 @@ const AppNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }) => ({
-      title: `A`,
-      headerBackTitle: null,
+      title: `首页`,
+      headerRight: (
+        <Button
+          onPress={() => alert('This is a button!')}
+          title="哈哈"
+          color="#ddd"
+        />
+      ),
+      headerLeft: (
+       <Text style={{color:'#fff'}}>返回</Text>
+      ),
+      headerTitleContainerStyle:{//首页样式设置
+        justifyContent:'center'
+      },
+      headerLeftContainerStyle:{
+         padding:10,
+         backgroundColor:'#3ad'
+      },
+      headerRightContainerStyle:{
+        padding:10,
+        backgroundColor:'#396'
+     },
+      headerBackTitle:false,
+      headerStyle: {
+        backgroundColor: '#f1f2f3',
+        height:getPixel(50),
+        shadowColor:'#fff'
+
+      },
+      headerTintColor: '#333',
+      headerTitleStyle: {
+        fontWeight: '400',
+      },
     }),
   },
-});
+  detail:{
+    screen:DetailScreen,
+    title:'详情'
+  },
+  web:{
+    screen:MyWeb,
+    title:'网页demo'
+  }
+},
+{
+  initialRouteName: 'Home',
+}
+);
 
 export default createAppContainer(AppNavigator);
